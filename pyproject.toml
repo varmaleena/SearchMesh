@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling>=1.26,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "searchmesh-runtime"
+version = "0.1.0"
+description = "A persistent, policy-aware SerpApi search runtime for agent teams"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+license = "MIT"
+dependencies = [
+  "fastapi>=0.115,<1", "uvicorn>=0.34,<1", "httpx>=0.28,<1",
+  "pydantic>=2.10,<3", "serpapi-search-tools>=1.0.0,<2",
+]
+
+[project.optional-dependencies]
+demo = ["google-adk>=2.3,<3"]
+test = ["pytest>=8,<10"]
+
+[project.scripts]
+searchmesh = "searchmesh.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/searchmesh"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
